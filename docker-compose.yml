@@ -1,0 +1,25 @@
+
+volumes:
+  mysql_data: {}
+
+services:
+  soat7grupo5-mysql:
+    image: mysql:8
+    volumes:
+      - mysql_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: soat7grupo5
+      MYSQL_USER: soat7grupo5
+      MYSQL_PASSWORD: soat7grupo5
+    ports:
+      - 3306:3306
+
+  soat7grupo5:
+    depends_on:
+      - soat7grupo5-mysql
+    image: brunobucci/soat7grupo5:1
+    restart: always
+    ports:
+      - 8080:8080
