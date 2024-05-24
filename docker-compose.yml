@@ -16,7 +16,7 @@ services:
     ports:
       - 3306:3306
 
-  soat7grupo5:
+  soat7grupo5-api:
     depends_on:
       - soat7grupo5-mysql
     image: brunobucci/soat7grupo5:1
