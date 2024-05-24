@@ -1,4 +1,4 @@
-FROM mysql:latest
+FROM mysql:latest 
 
 WORKDIR /usr/local/
 
