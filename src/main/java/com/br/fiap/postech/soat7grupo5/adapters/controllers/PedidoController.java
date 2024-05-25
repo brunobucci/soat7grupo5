@@ -61,9 +61,10 @@ public class PedidoController {
 		pedidoProdutoServicePort.salvarPedidoProduto(pedidoDTO.getIdPedido(), pedidoCompletoDTO.getPedidoProdutoDTOs());
 	}
 	
-	@PutMapping
+	@PutMapping(path="{idPedido}/status/{idStatus}")
 	@Operation(summary = "Realiza a edição do pedido.")
-	void editarPedido(@RequestBody PedidoDTO pedidoDTO) {
+	void editarPedido(@Parameter(description = "ID do pedido.", example = "1") @PathVariable int idPedido, @Parameter(description = "ID do status do pedido (1: Pendente Pagamento, 2: Em preparação, 3: Pronto, 4: Finalizado).", example = "1") @PathVariable int idStatus) {
+		PedidoDTO pedidoDTO = new PedidoDTO(idPedido, idStatus);
 		pedidoServicePort.salvarPedido(pedidoDTO);
 	}
 

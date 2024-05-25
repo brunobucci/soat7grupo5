@@ -14,5 +14,4 @@ public interface PedidoServicePort {
 
 	PedidoDTO salvarPedido(PedidoDTO pedidoDTO);
 
-    //void atualizarEstoque(String sku, EstoqueDTO estoqueDTO) throws NotFoundException;
 }
