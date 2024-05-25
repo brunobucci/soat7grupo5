@@ -1,12 +1,8 @@
-
-volumes:
-  mysql_data: {}
-
 services:
   soat7grupo5-mysql:
     image: mysql:8
     volumes:
-      - mysql_data:/var/lib/mysql
+    - "./database/init.sql:/docker-entrypoint-initdb.d/1.sql"
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
