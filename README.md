@@ -4,7 +4,7 @@
 ## Grupo 5:
 RM355154: Bruno Bucci Xavier
 
-RM355155: Marcelo Carvalho dee Quevedo
+RM355155: Marcelo Carvalho de Quevedo
 
 ### Repositório:
 
