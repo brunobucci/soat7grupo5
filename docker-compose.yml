@@ -3,6 +3,7 @@ services:
     image: mysql:8
     volumes:
     - "./database/init.sql:/docker-entrypoint-initdb.d/1.sql"
+    - "./databse/mycustom.cnf:/etc/mysql/conf.d/custom.cnf"
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
