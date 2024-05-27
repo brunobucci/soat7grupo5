@@ -15,7 +15,7 @@ services:
   soat7grupo5-api:
     depends_on:
       - soat7grupo5-mysql
-    image: brunobucci/soat7grupo5
+    image: marceloq/soat7grupo5
     restart: always
     ports:
       - 8080:8080
