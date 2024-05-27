@@ -22,6 +22,11 @@ public class PedidoDTO {
 		this.dataCriacao = dataCriacao;
 	}
 
+	public PedidoDTO(int idPedido2, int idStatus2) {
+		this.idPedido = idPedido2;
+		this.idStatus = idStatus2;
+	}
+
 	public int getIdPedido() {
 		return idPedido;
 	}
