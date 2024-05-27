@@ -27,6 +27,9 @@ public class PedidoDTO {
 		this.idStatus = idStatus2;
 	}
 
+	public PedidoDTO() {
+	}
+	
 	public int getIdPedido() {
 		return idPedido;
 	}
