@@ -17,12 +17,12 @@ https://github.com/brunobucci/soat7grupo5.git
 master
 
 
-### Miro:
+### DDD, Event Storming:
 
-[DDD, Event Storming](https://miro.com/welcomeonboard/Wk9TcU15SW15Z0RucWlOWk1BOHo0V2lmUUtFcXJJeWxSMm5wR0tQTDRtZzRhNWxISEdXUDhCSEcwdlJyN25BcHwzNDU4NzY0NTc0NjcwNzc0MzA0fDI=?share_link_id=974719533397)
+https://miro.com/app/board/uXjVKWlAvrs=/?share_link_id=340891882934
 
 
-### Aplicação:
+### Projeto:
 
 #### Instruções:
 
