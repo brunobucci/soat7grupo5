@@ -12,7 +12,9 @@ RUN git clone https://github.com/brunobucci/soat7grupo5.git
 
 WORKDIR /usr/local/soat7grupo5
 
-RUN git checkout homologacao
+RUN git pull
+
+RUN rm -rf target
 
 RUN mvn clean install package
 
