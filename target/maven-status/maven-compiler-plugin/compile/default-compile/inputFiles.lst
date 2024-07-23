@@ -1,0 +1,13 @@
+C:\Users\Marcelo\git\soat7grupo5\src\main\java\com\br\fiap\postech\soat7grupo5\infrastructure\persistence\ClienteEntity.java
+C:\Users\Marcelo\git\soat7grupo5\src\main\java\com\br\fiap\postech\soat7grupo5\main\ClienteConfig.java
+C:\Users\Marcelo\git\soat7grupo5\src\main\java\com\br\fiap\postech\soat7grupo5\infrastructure\controllers\ClienteDTOMapper.java
+C:\Users\Marcelo\git\soat7grupo5\src\main\java\com\br\fiap\postech\soat7grupo5\infrastructure\persistence\ClienteRepository.java
+C:\Users\Marcelo\git\soat7grupo5\src\main\java\com\br\fiap\postech\soat7grupo5\infrastructure\controllers\ClienteRequest.java
+C:\Users\Marcelo\git\soat7grupo5\src\main\java\com\br\fiap\postech\soat7grupo5\domain\entity\Cliente.java
+C:\Users\Marcelo\git\soat7grupo5\src\main\java\com\br\fiap\postech\soat7grupo5\application\gateways\ClienteGateway.java
+C:\Users\Marcelo\git\soat7grupo5\src\main\java\com\br\fiap\postech\soat7grupo5\infrastructure\controllers\ClienteController.java
+C:\Users\Marcelo\git\soat7grupo5\src\main\java\com\br\fiap\postech\soat7grupo5\infrastructure\gateways\ClienteRepositoryGateway.java
+C:\Users\Marcelo\git\soat7grupo5\src\main\java\com\br\fiap\postech\soat7grupo5\infrastructure\gateways\mappers\ClienteEntityMapper.java
+C:\Users\Marcelo\git\soat7grupo5\src\main\java\com\br\fiap\postech\soat7grupo5\infrastructure\controllers\ClienteResponse.java
+C:\Users\Marcelo\git\soat7grupo5\src\main\java\com\br\fiap\postech\soat7grupo5\Soat7grupo5Application.java
+C:\Users\Marcelo\git\soat7grupo5\src\main\java\com\br\fiap\postech\soat7grupo5\application\usecases\cliente\ClienteInteractor.java

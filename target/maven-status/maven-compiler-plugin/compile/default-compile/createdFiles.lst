@@ -1,0 +1,13 @@
+com\br\fiap\postech\soat7grupo5\main\ClienteConfig.class
+com\br\fiap\postech\soat7grupo5\infrastructure\controllers\ClienteController.class
+com\br\fiap\postech\soat7grupo5\infrastructure\gateways\mappers\ClienteEntityMapper.class
+com\br\fiap\postech\soat7grupo5\infrastructure\controllers\ClienteDTOMapper.class
+com\br\fiap\postech\soat7grupo5\infrastructure\gateways\ClienteRepositoryGateway.class
+com\br\fiap\postech\soat7grupo5\application\gateways\ClienteGateway.class
+com\br\fiap\postech\soat7grupo5\infrastructure\persistence\ClienteRepository.class
+com\br\fiap\postech\soat7grupo5\application\usecases\cliente\ClienteInteractor.class
+com\br\fiap\postech\soat7grupo5\domain\entity\Cliente.class
+com\br\fiap\postech\soat7grupo5\infrastructure\controllers\ClienteResponse.class
+com\br\fiap\postech\soat7grupo5\Soat7grupo5Application.class
+com\br\fiap\postech\soat7grupo5\infrastructure\controllers\ClienteRequest.class
+com\br\fiap\postech\soat7grupo5\infrastructure\persistence\ClienteEntity.class
