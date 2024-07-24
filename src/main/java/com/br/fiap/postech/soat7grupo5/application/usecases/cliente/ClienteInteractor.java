@@ -22,7 +22,7 @@ public class ClienteInteractor {
 	}
 
 	public Cliente buscarClientePorCpf(String cpf) {
-		return clienteGateway.buscarClientePorId(cpf);
+		return clienteGateway.buscarClientePorCpf(cpf);
 	}
 
 	public List<Cliente> buscarClientes() {

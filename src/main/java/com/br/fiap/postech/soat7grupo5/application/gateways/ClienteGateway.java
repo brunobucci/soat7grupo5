@@ -8,7 +8,7 @@ public interface ClienteGateway {
 
 	Cliente criarCliente(Cliente cliente);
 	Cliente buscarClientePorId(int id);
-	Cliente buscarClientePorId(String cpf);
+	Cliente buscarClientePorCpf(String cpf);
 	List<Cliente> buscarClientes();
 	
 }

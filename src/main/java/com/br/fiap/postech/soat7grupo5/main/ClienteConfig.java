@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.br.fiap.postech.soat7grupo5.application.gateways.ClienteGateway;
 import com.br.fiap.postech.soat7grupo5.application.usecases.cliente.ClienteInteractor;
-import com.br.fiap.postech.soat7grupo5.infrastructure.controllers.ClienteDTOMapper;
+import com.br.fiap.postech.soat7grupo5.infrastructure.controllers.cliente.ClienteDTOMapper;
 import com.br.fiap.postech.soat7grupo5.infrastructure.gateways.ClienteRepositoryGateway;
 import com.br.fiap.postech.soat7grupo5.infrastructure.gateways.mappers.ClienteEntityMapper;
 import com.br.fiap.postech.soat7grupo5.infrastructure.persistence.ClienteRepository;

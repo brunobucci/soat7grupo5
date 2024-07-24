@@ -9,7 +9,7 @@ import io.swagger.v3.oas.annotations.info.Info;
 @SpringBootApplication
 @OpenAPIDefinition(info = 
 		@Info(title = "Soat7grupo5 API", 
-			version = "1.0", 
+			version = "2.0", 
 			description = "Página de referência da Soat7grupo5 API")
 )
 public class Soat7grupo5Application {

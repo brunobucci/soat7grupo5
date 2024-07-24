@@ -32,7 +32,7 @@ public class ClienteRepositoryGateway implements ClienteGateway{
 		return clienteEntityMapper.toDomainObj(savedObj.get());
 	}
 	@Override
-	public Cliente buscarClientePorId(String cpf) {
+	public Cliente buscarClientePorCpf(String cpf) {
 		Optional<ClienteEntity> savedObj = clienteRepository.findByCpf(cpf);
 		return clienteEntityMapper.toDomainObj(savedObj.get());
 	}
