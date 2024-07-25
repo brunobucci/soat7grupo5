@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: soat7grupo5-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: soat7grupo5-api
+  template:
+    metadata:
+      labels:
+        app: soat7grupo5-api
+    spec:
+      containers:
+      - name: soat7grupo5-api
+        image: brunobucci/soat7grupo5
+        resources:
+          requests:
+            memory: "1Gi"
+            cpu: "1"
+          limits:
+            memory: "2Gi"
+            cpu: "2"
+        ports:
+        - containerPort: 8080
+        env:
+        - name: MYSQL_HOST
+          value: mysql
+        - name: MYSQL_PORT
+          value: "3306"
