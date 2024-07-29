@@ -15,8 +15,12 @@ spec:
               name: mysql-configmap
       volumeMounts:
         - name: init-scripts
-          mountPath: /docker-entrypoint-initdb.d
+          mountPath: /docker-entrypoint-initdb.d/init.sql
+          subPath: init.sql
   volumes:
     - name: init-scripts
       configMap:
         name: mysql-configmap
+        items:
+          - key: init.sql
+            path: init.sql

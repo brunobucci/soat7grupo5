@@ -4,10 +4,12 @@ metadata:
   name: mysql-configmap
 data:
   MYSQL_ROOT_PASSWORD: "root"
-  MYSQL_ALLOW_EMPTY_PASSWORD: "no"
   MYSQL_DATABASE: "soat7grupo5"
   MYSQL_PASSWORD: "soat7grupo5"
   init.sql: |
+    CREATE USER 'soat7grupo5'@'%' IDENTIFIED BY 'soat7grupo5';
+    GRANT ALL PRIVILEGES ON *.* TO 'soat7grupo5'@'%';
+
     USE soat7grupo5;
 
     --
@@ -26,6 +28,7 @@ data:
       PRIMARY KEY (`id_cliente`)
     ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=ucs2;
     /*!40101 SET character_set_client = @saved_cs_client */;
+
 
     --
     -- Dumping data for table `cliente`
