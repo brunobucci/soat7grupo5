@@ -1,14 +1,13 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: mysql-init-scripts
+  name: mysql-configmap
 data:
+  MYSQL_ROOT_PASSWORD: "root"
+  MYSQL_ALLOW_EMPTY_PASSWORD: "no"
+  MYSQL_DATABASE: "soat7grupo5"
+  MYSQL_PASSWORD: "soat7grupo5"
   init.sql: |
-    CREATE DATABASE IF NOT EXISTS soat7grupo5;
-    CREATE USER IF NOT EXISTS 'soat7grupo5'@'%' IDENTIFIED BY 'soat7grupo5';
-    GRANT ALL PRIVILEGES ON soat7grupo5.* TO 'soat7grupo5'@'%';
-    FLUSH PRIVILEGES;
-
     USE soat7grupo5;
 
     --
