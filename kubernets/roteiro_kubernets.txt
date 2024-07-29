@@ -11,18 +11,21 @@ kubectl apply -f mysql-svc.yaml
 3- Criar o POD do MySQL
 kubectl apply -f mysql-deployment.yaml
 
-6- Criar o POD da API
+4- Criar o POD da API
 kubectl apply -f api-deployment.yaml
 
-11- Criar o component para as métricas - HPA
+5- Criar o component para as métricas - HPA
 kubectl apply -f kube-metrics.yaml
 
-12- Criar o HPA da APP
+6- Criar o HPA da APP
 kubectl apply -f api-hpa.yaml
 
 Comandos par testar:
 #Checar o que está no ar
 kubectl get pod,deployment,configmap,svc -o wide
+
+#Rodar script de Stress test
+./stress-test.sh
 
 #Keep Watch dos POD's
 kubectl get pod --watch
