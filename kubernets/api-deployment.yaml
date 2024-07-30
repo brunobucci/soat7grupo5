@@ -29,3 +29,17 @@ spec:
           limits:
             cpu: "1.2"
             memory: "512Mi"
+        readinessProbe:
+          httpGet:
+            path: /produtos
+            port: 8081
+          initialDelaySeconds: 20
+          periodSeconds: 20
+          failureThreshold: 10
+        livenessProbe:
+          httpGet:
+            path: /produtos
+            port: 8081
+          initialDelaySeconds: 40
+          periodSeconds: 20
+          failureThreshold: 5
