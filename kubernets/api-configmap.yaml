@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: api-configmap
+data:
+  SPRING_DATASOURCE_URL: "jdbc:mysql://mysql-svc:3306/soat7grupo5"
+  SPRING_DATASOURCE_USERNAME: "soat7grupo5"
+  SPRING_DATASOURCE_PASSWORD: "soat7grupo5"
