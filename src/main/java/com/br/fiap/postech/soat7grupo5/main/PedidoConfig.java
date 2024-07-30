@@ -4,6 +4,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.br.fiap.postech.soat7grupo5.application.gateways.PedidoGateway;
+import com.br.fiap.postech.soat7grupo5.application.usecases.pedido.AtualizarStatusPagamentoInteractor;
+import com.br.fiap.postech.soat7grupo5.application.usecases.pedido.BuscarPedidoPorIdInteractor;
 import com.br.fiap.postech.soat7grupo5.application.usecases.pedido.BuscarPedidosInteractor;
 import com.br.fiap.postech.soat7grupo5.application.usecases.pedido.BuscarPedidosOrdenadosInteractor;
 import com.br.fiap.postech.soat7grupo5.application.usecases.pedido.BuscarPedidosPorStatusInteractor;
@@ -39,6 +41,11 @@ public class PedidoConfig {
 	}
 	
 	@Bean
+	BuscarPedidoPorIdInteractor buscarPedidoPorIdInteractor(PedidoGateway pedidoGateway) {
+		return new BuscarPedidoPorIdInteractor(pedidoGateway);
+	}
+	
+	@Bean
 	BuscarStatusPagamentoPedidoPorIdInteractor buscarStatusPagamentoPedidoPorIdInteractor(PedidoGateway pedidoGateway) {
 		return new BuscarStatusPagamentoPedidoPorIdInteractor(pedidoGateway);
 	}
@@ -46,6 +53,11 @@ public class PedidoConfig {
 	@Bean
 	BuscarPedidosOrdenadosInteractor buscarPedidosOrdenadosInteractor(PedidoGateway pedidoGateway) {
 		return new BuscarPedidosOrdenadosInteractor(pedidoGateway);
+	}
+	
+	@Bean
+	AtualizarStatusPagamentoInteractor atualizarStatusPagamentoInteractor(PedidoGateway pedidoGateway) {
+		return new AtualizarStatusPagamentoInteractor(pedidoGateway);
 	}
 	
 	@Bean

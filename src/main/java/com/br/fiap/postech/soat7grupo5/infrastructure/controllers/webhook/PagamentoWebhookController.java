@@ -18,7 +18,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
-@Tag(name = "PagamentoWebhook", description = "Recursos relacionados aos produtos.")
+@Tag(name = "PagamentoWebhook", description = "Webhook para atualização de status de pagamento dos pedidos.")
 @RequestMapping(path="pagamento-webhook", produces=MediaType.APPLICATION_JSON_VALUE)
 public class PagamentoWebhookController {
 
@@ -31,7 +31,7 @@ public class PagamentoWebhookController {
 	}
 	
     @PostMapping
-    @Operation(summary = "Realiza o cadastro do produto.")
+    @Operation(summary = "Recebe dados e atualiza status do pagamento.")
     void recebeDados(@RequestBody WebhookNotificacaoRequest request) {
     	atualizarStatusPagamento(request);
     }

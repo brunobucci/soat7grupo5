@@ -39,6 +39,8 @@ public class PedidoController {
 	private final BuscarPedidosInteractor buscarPedidosInteractor;
 	private final BuscarStatusPagamentoPedidoPorIdInteractor buscarStatusPagamentoPedidoPorIdInteractor;
 	private final BuscarPedidosOrdenadosInteractor buscarPedidosOrdenadosInteractor;
+	private final BuscarPedidoPorIdInteractor buscarPedidoPorIdInteractor;
+	private final AtualizarStatusPagamentoInteractor atualizarStatusPagamentoInteractor;
 
 	private final PedidoDTOMapper pedidoDTOMapper;
 	private final SalvarPedidoProdutoInteractor salvarPedidoProdutoInteractor;
@@ -52,6 +54,8 @@ public class PedidoController {
 		this.buscarPedidosInteractor = buscarPedidosInteractor;
 		this.buscarStatusPagamentoPedidoPorIdInteractor = buscarStatusPagamentoPedidoPorIdInteractor;
 		this.buscarPedidosOrdenadosInteractor = buscarPedidosOrdenadosInteractor;
+		this.buscarPedidoPorIdInteractor = buscarPedidoPorIdInteractor;
+		this.atualizarStatusPagamentoInteractor = atualizarStatusPagamentoInteractor;
 		this.pedidoDTOMapper = pedidoDTOMapper;
 		this.salvarPedidoProdutoInteractor = salvarPedidoProdutoInteractor;
 	}
