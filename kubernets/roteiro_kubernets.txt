@@ -18,9 +18,9 @@ Roteiro para o teste:
 
     kubectl apply -f mysql-pvc.yaml
 
-    1.5 - Statefulset
+    1.5 - Deployment
 
-    kubectl apply -f mysql-statefulset.yaml
+    kubectl apply -f mysql-deployment.yaml
 
 2- Criar o ambiente das APIs
 
