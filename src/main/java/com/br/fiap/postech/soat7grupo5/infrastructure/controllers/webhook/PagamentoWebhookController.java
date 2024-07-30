@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.br.fiap.postech.soat7grupo5.application.usecases.PedidoInteractor;
+import com.br.fiap.postech.soat7grupo5.application.usecases.pedido.AtualizarStatusPagamentoInteractor;
+import com.br.fiap.postech.soat7grupo5.application.usecases.pedido.BuscarPedidoPorIdInteractor;
 import com.br.fiap.postech.soat7grupo5.domain.entity.Pedido;
 import com.br.fiap.postech.soat7grupo5.infrastructure.controllers.pedido.StatusPagamentoConstantes;
 
@@ -21,10 +22,12 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @RequestMapping(path="pagamento-webhook", produces=MediaType.APPLICATION_JSON_VALUE)
 public class PagamentoWebhookController {
 
-	private final PedidoInteractor pedidoInteractor; 
+	private final BuscarPedidoPorIdInteractor buscarPedidoPorIdInteractor; 
+	private final AtualizarStatusPagamentoInteractor atualizarStatusPagamentoInteractor;
 
-	public PagamentoWebhookController(PedidoInteractor pedidoInteractor) {
-		this.pedidoInteractor = pedidoInteractor;
+	public PagamentoWebhookController(BuscarPedidoPorIdInteractor buscarPedidoPorIdInteractor, AtualizarStatusPagamentoInteractor atualizarStatusPagamentoInteractor) {
+		this.buscarPedidoPorIdInteractor = buscarPedidoPorIdInteractor;
+		this.atualizarStatusPagamentoInteractor = atualizarStatusPagamentoInteractor;
 	}
 	
     @PostMapping
@@ -35,13 +38,13 @@ public class PagamentoWebhookController {
 
     @Async
     void atualizarStatusPagamento(WebhookNotificacaoRequest webhookNotificacaoPayload) {
-		Pedido pedido = pedidoInteractor.buscarPedidoPorId(webhookNotificacaoPayload.idPedido());
+		Pedido pedido = buscarPedidoPorIdInteractor.buscarPedidoPorId(webhookNotificacaoPayload.idPedido());
 		if (Objects.nonNull(pedido)) {
 			if(webhookNotificacaoPayload.pagamentoAprovado()) {
-				pedidoInteractor.atualizarStatusPagamento(pedido.getIdPedido(), StatusPagamentoConstantes.APROVADO);
+				atualizarStatusPagamentoInteractor.atualizarStatusPagamento(pedido.getIdPedido(), StatusPagamentoConstantes.APROVADO);
 			}
 			else {
-				pedidoInteractor.atualizarStatusPagamento(pedido.getIdPedido(), StatusPagamentoConstantes.REPROVADO);
+				atualizarStatusPagamentoInteractor.atualizarStatusPagamento(pedido.getIdPedido(), StatusPagamentoConstantes.REPROVADO);
 			}
 		}
 	}

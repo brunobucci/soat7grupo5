@@ -12,8 +12,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.br.fiap.postech.soat7grupo5.application.usecases.PedidoInteractor;
-import com.br.fiap.postech.soat7grupo5.application.usecases.PedidoProdutoInteractor;
+import com.br.fiap.postech.soat7grupo5.application.usecases.pedido.AtualizarStatusPagamentoInteractor;
+import com.br.fiap.postech.soat7grupo5.application.usecases.pedido.BuscarPedidoPorIdInteractor;
+import com.br.fiap.postech.soat7grupo5.application.usecases.pedido.BuscarPedidosInteractor;
+import com.br.fiap.postech.soat7grupo5.application.usecases.pedido.BuscarPedidosOrdenadosInteractor;
+import com.br.fiap.postech.soat7grupo5.application.usecases.pedido.BuscarPedidosPorStatusInteractor;
+import com.br.fiap.postech.soat7grupo5.application.usecases.pedido.BuscarStatusPagamentoPedidoPorIdInteractor;
+import com.br.fiap.postech.soat7grupo5.application.usecases.pedido.CriarPedidoInteractor;
+import com.br.fiap.postech.soat7grupo5.application.usecases.pedido.EditarPedidoInteractor;
+import com.br.fiap.postech.soat7grupo5.application.usecases.pedidoproduto.SalvarPedidoProdutoInteractor;
 import com.br.fiap.postech.soat7grupo5.domain.entity.Pedido;
 import com.br.fiap.postech.soat7grupo5.domain.entity.PedidoProduto;
 
@@ -26,64 +33,77 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @RequestMapping(path="pedidos", produces=MediaType.APPLICATION_JSON_VALUE)
 public class PedidoController {
 
-	private final PedidoInteractor pedidoInteractor; 
-	private final PedidoDTOMapper pedidoDTOMapper;
-	private final PedidoProdutoInteractor pedidoProdutoInteractor;
-	
-    public PedidoController(PedidoInteractor pedidoInteractor, PedidoDTOMapper pedidoDTOMapper, PedidoProdutoInteractor pedidoProdutoInteractor) {
-        this.pedidoInteractor = pedidoInteractor;
-        this.pedidoDTOMapper = pedidoDTOMapper;
-		this.pedidoProdutoInteractor = pedidoProdutoInteractor;
-    }
+	private final CriarPedidoInteractor criarPedidoInteractor;
+	private final EditarPedidoInteractor editarPedidoInteractor;
+	private final BuscarPedidosPorStatusInteractor buscarPedidosPorStatusInteractor;
+	private final BuscarPedidosInteractor buscarPedidosInteractor;
+	private final BuscarStatusPagamentoPedidoPorIdInteractor buscarStatusPagamentoPedidoPorIdInteractor;
+	private final BuscarPedidosOrdenadosInteractor buscarPedidosOrdenadosInteractor;
 
-    @PostMapping(path="/checkout")
-    @Operation(summary = "Realiza o cadastro do pedido.")
-    String criarPedido(@RequestBody PedidoCompletoRequest pedidoCompletoRequest) {
-    	
-    	Double precoTotal = pedidoCompletoRequest.getPedidoProdutos().stream().collect(Collectors.summingDouble(PedidoProduto::getPrecoProduto));
+	private final PedidoDTOMapper pedidoDTOMapper;
+	private final SalvarPedidoProdutoInteractor salvarPedidoProdutoInteractor;
+
+	public PedidoController(CriarPedidoInteractor criarPedidoInteractor, EditarPedidoInteractor editarPedidoInteractor, BuscarPedidosPorStatusInteractor buscarPedidosPorStatusInteractor, BuscarPedidosInteractor buscarPedidosInteractor, 
+			BuscarStatusPagamentoPedidoPorIdInteractor buscarStatusPagamentoPedidoPorIdInteractor, BuscarPedidosOrdenadosInteractor buscarPedidosOrdenadosInteractor, BuscarPedidoPorIdInteractor buscarPedidoPorIdInteractor,
+			AtualizarStatusPagamentoInteractor atualizarStatusPagamentoInteractor, PedidoDTOMapper pedidoDTOMapper, SalvarPedidoProdutoInteractor salvarPedidoProdutoInteractor) {
+		this.criarPedidoInteractor = criarPedidoInteractor;
+		this.editarPedidoInteractor = editarPedidoInteractor;
+		this.buscarPedidosPorStatusInteractor = buscarPedidosPorStatusInteractor;
+		this.buscarPedidosInteractor = buscarPedidosInteractor;
+		this.buscarStatusPagamentoPedidoPorIdInteractor = buscarStatusPagamentoPedidoPorIdInteractor;
+		this.buscarPedidosOrdenadosInteractor = buscarPedidosOrdenadosInteractor;
+		this.pedidoDTOMapper = pedidoDTOMapper;
+		this.salvarPedidoProdutoInteractor = salvarPedidoProdutoInteractor;
+	}
+
+	@PostMapping(path="/checkout")
+	@Operation(summary = "Realiza o cadastro do pedido.")
+	String criarPedido(@RequestBody PedidoCompletoRequest pedidoCompletoRequest) {
+
+		Double precoTotal = pedidoCompletoRequest.getPedidoProdutos().stream().collect(Collectors.summingDouble(PedidoProduto::getPrecoProduto));
 		int duracaoTotal = pedidoCompletoRequest.getPedidoProdutos().stream().collect(Collectors.summingInt(PedidoProduto::getDuracaoPreparo));
 		pedidoCompletoRequest.getPedido().setPreco(precoTotal);
 		pedidoCompletoRequest.getPedido().setDuracaoTotalPreparo(duracaoTotal);
-		
-		Pedido pedido = pedidoInteractor.criarPedido(pedidoCompletoRequest.getPedido());
-		
-		pedidoProdutoInteractor.salvarPedidoProduto(pedido.getIdPedido(), pedidoCompletoRequest.getPedidoProdutos());
-    	
-    	return "idPedido: "+pedido.getIdPedido();
-    }
-    
-    @PutMapping(path="{idPedido}/status/{idStatus}")
-    @Operation(summary = "Realiza a edição do pedido.")
-    PedidoResponse editarPedido(@Parameter(description = "ID do pedido.", example = "1") @PathVariable int idPedido, @Parameter(description = "ID do status do pedido (1: Recebido, 2: Em preparação, 3: Pronto, 4: Finalizado).", example = "1") @PathVariable int idStatus) {
-    	Pedido pedido = pedidoInteractor.editarPedido(idPedido, idStatus);
-    	return pedidoDTOMapper.toResponse(pedido);
-    }
-    
-    @GetMapping
-    @Operation(summary = "Retorna lista com todos os pedidos cadastrados.")
-    List<PedidoResponse> buscarPedidos() {
-    	List<Pedido> pedidos = pedidoInteractor.buscarPedidos();
-    	return pedidoDTOMapper.toResponseList(pedidos);
-    }
-    
-    @GetMapping(path="/busca-ordenada")
-    @Operation(summary = "Retorna lista com pedidos ordenados.")
-    List<PedidoResponse> buscarPedidosOrdenados() {
-    	List<Pedido> pedidos = pedidoInteractor.buscarPedidosOrdenados();
-    	return pedidoDTOMapper.toResponseList(pedidos);
-    }
-    
-    @GetMapping(path="/status-pagamento/{idPedido}")
-    @Operation(summary = "Buscar status pagamento por id do pedido.")
-    String buscarStatusPagamentoPedidoPorId(@Parameter(description = "ID do pedido", example = "1") @PathVariable int idPedido) {
-    	boolean pagamentAprovado = pedidoInteractor.buscarStatusPagamentoPedidoPorId(idPedido);
-    	return "pagamentoAprovado: " + pagamentAprovado;
-    }    
-    
-    @GetMapping(path="/{idStatus}")
-    @Operation(summary = "Busca pedidos por status.")
-    List<PedidoResponse> buscarPedidosPorStatus(@Parameter(description = "ID do status", example = "1") @PathVariable int idStatus) {
-    	List<Pedido> pedidos = pedidoInteractor.buscarPedidosPorStatus(idStatus);
-    	return pedidoDTOMapper.toResponseList(pedidos);
-    }
+
+		Pedido pedido = criarPedidoInteractor.criarPedido(pedidoCompletoRequest.getPedido());
+
+		salvarPedidoProdutoInteractor.salvarPedidoProduto(pedido.getIdPedido(), pedidoCompletoRequest.getPedidoProdutos());
+
+		return "idPedido: "+pedido.getIdPedido();
+	}
+
+	@PutMapping(path="{idPedido}/status/{idStatus}")
+	@Operation(summary = "Realiza a edição do pedido.")
+	PedidoResponse editarPedido(@Parameter(description = "ID do pedido.", example = "1") @PathVariable int idPedido, @Parameter(description = "ID do status do pedido (1: Recebido, 2: Em preparação, 3: Pronto, 4: Finalizado).", example = "1") @PathVariable int idStatus) {
+		Pedido pedido = editarPedidoInteractor.editarPedido(idPedido, idStatus);
+		return pedidoDTOMapper.toResponse(pedido);
+	}
+
+	@GetMapping
+	@Operation(summary = "Retorna lista com todos os pedidos cadastrados.")
+	List<PedidoResponse> buscarPedidos() {
+		List<Pedido> pedidos = buscarPedidosInteractor.buscarPedidos();
+		return pedidoDTOMapper.toResponseList(pedidos);
+	}
+
+	@GetMapping(path="/busca-ordenada")
+	@Operation(summary = "Retorna lista com pedidos ordenados.")
+	List<PedidoResponse> buscarPedidosOrdenados() {
+		List<Pedido> pedidos = buscarPedidosOrdenadosInteractor.buscarPedidosOrdenados();
+		return pedidoDTOMapper.toResponseList(pedidos);
+	}
+
+	@GetMapping(path="/status-pagamento/{idPedido}")
+	@Operation(summary = "Buscar status pagamento por id do pedido.")
+	String buscarStatusPagamentoPedidoPorId(@Parameter(description = "ID do pedido", example = "1") @PathVariable int idPedido) {
+		boolean pagamentAprovado = buscarStatusPagamentoPedidoPorIdInteractor.buscarStatusPagamentoPedidoPorId(idPedido);
+		return "pagamentoAprovado: " + pagamentAprovado;
+	}    
+
+	@GetMapping(path="/{idStatus}")
+	@Operation(summary = "Busca pedidos por status.")
+	List<PedidoResponse> buscarPedidosPorStatus(@Parameter(description = "ID do status", example = "1") @PathVariable int idStatus) {
+		List<Pedido> pedidos = buscarPedidosPorStatusInteractor.buscarPedidosPorStatus(idStatus);
+		return pedidoDTOMapper.toResponseList(pedidos);
+	}
 }

@@ -4,7 +4,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.br.fiap.postech.soat7grupo5.application.gateways.PedidoGateway;
-import com.br.fiap.postech.soat7grupo5.application.usecases.PedidoInteractor;
+import com.br.fiap.postech.soat7grupo5.application.usecases.pedido.BuscarPedidosInteractor;
+import com.br.fiap.postech.soat7grupo5.application.usecases.pedido.BuscarPedidosOrdenadosInteractor;
+import com.br.fiap.postech.soat7grupo5.application.usecases.pedido.BuscarPedidosPorStatusInteractor;
+import com.br.fiap.postech.soat7grupo5.application.usecases.pedido.BuscarStatusPagamentoPedidoPorIdInteractor;
+import com.br.fiap.postech.soat7grupo5.application.usecases.pedido.CriarPedidoInteractor;
+import com.br.fiap.postech.soat7grupo5.application.usecases.pedido.EditarPedidoInteractor;
 import com.br.fiap.postech.soat7grupo5.infrastructure.controllers.pedido.PedidoDTOMapper;
 import com.br.fiap.postech.soat7grupo5.infrastructure.gateways.PedidoRepositoryGateway;
 import com.br.fiap.postech.soat7grupo5.infrastructure.gateways.mappers.PedidoEntityMapper;
@@ -14,8 +19,33 @@ import com.br.fiap.postech.soat7grupo5.infrastructure.persistence.PedidoReposito
 public class PedidoConfig {
 
 	@Bean
-	PedidoInteractor pedidoInteractor(PedidoGateway pedidoGateway) {
-		return new PedidoInteractor(pedidoGateway);
+	CriarPedidoInteractor criarPedidoInteractor(PedidoGateway pedidoGateway) {
+		return new CriarPedidoInteractor(pedidoGateway);
+	}
+	
+	@Bean
+	EditarPedidoInteractor editarPedidoInteractor(PedidoGateway pedidoGateway) {
+		return new EditarPedidoInteractor(pedidoGateway);
+	}
+	
+	@Bean
+	BuscarPedidosPorStatusInteractor buscarPedidosPorStatusInteractor(PedidoGateway pedidoGateway) {
+		return new BuscarPedidosPorStatusInteractor(pedidoGateway);
+	}
+	
+	@Bean
+	BuscarPedidosInteractor buscarPedidosInteractor(PedidoGateway pedidoGateway) {
+		return new BuscarPedidosInteractor(pedidoGateway);
+	}
+	
+	@Bean
+	BuscarStatusPagamentoPedidoPorIdInteractor buscarStatusPagamentoPedidoPorIdInteractor(PedidoGateway pedidoGateway) {
+		return new BuscarStatusPagamentoPedidoPorIdInteractor(pedidoGateway);
+	}
+	
+	@Bean
+	BuscarPedidosOrdenadosInteractor buscarPedidosOrdenadosInteractor(PedidoGateway pedidoGateway) {
+		return new BuscarPedidosOrdenadosInteractor(pedidoGateway);
 	}
 	
 	@Bean

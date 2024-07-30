@@ -4,7 +4,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.br.fiap.postech.soat7grupo5.application.gateways.ClienteGateway;
-import com.br.fiap.postech.soat7grupo5.application.usecases.ClienteInteractor;
+import com.br.fiap.postech.soat7grupo5.application.usecases.cliente.BuscarClientePorCpfInteractor;
+import com.br.fiap.postech.soat7grupo5.application.usecases.cliente.BuscarClientePorIdInteractor;
+import com.br.fiap.postech.soat7grupo5.application.usecases.cliente.BuscarClientesInteractor;
+import com.br.fiap.postech.soat7grupo5.application.usecases.cliente.CriarClienteInteractor;
 import com.br.fiap.postech.soat7grupo5.infrastructure.controllers.cliente.ClienteDTOMapper;
 import com.br.fiap.postech.soat7grupo5.infrastructure.gateways.ClienteRepositoryGateway;
 import com.br.fiap.postech.soat7grupo5.infrastructure.gateways.mappers.ClienteEntityMapper;
@@ -14,8 +17,23 @@ import com.br.fiap.postech.soat7grupo5.infrastructure.persistence.ClienteReposit
 public class ClienteConfig {
 
 	@Bean
-	ClienteInteractor criarClienteInteractor(ClienteGateway clienteGateway) {
-		return new ClienteInteractor(clienteGateway);
+	CriarClienteInteractor criarClienteInteractor(ClienteGateway clienteGateway) {
+		return new CriarClienteInteractor(clienteGateway);
+	}
+	
+	@Bean
+	BuscarClientePorCpfInteractor buscarClientePorCpfInteractor(ClienteGateway clienteGateway) {
+		return new BuscarClientePorCpfInteractor(clienteGateway);
+	}
+	
+	@Bean
+	BuscarClientePorIdInteractor buscarClientePorIdInteractor(ClienteGateway clienteGateway) {
+		return new BuscarClientePorIdInteractor(clienteGateway);
+	}
+	
+	@Bean
+	BuscarClientesInteractor buscarClientesInteractor(ClienteGateway clienteGateway) {
+		return new BuscarClientesInteractor(clienteGateway);
 	}
 	
 	@Bean

@@ -1,0 +1,20 @@
+## MySQL
+# Criar imagem do MySQL local
+docker build -t soat7grupo5-mysql .
+
+# Gerar imagem MySQL para o dockerhub
+docker tag soat7grupo5-mysql:latest brunobucci/soat7grupo5-mysql
+
+# Subir a imagem para o dockerhub
+docker push brunobucci/soat7grupo5-mysql
+
+# Rodar local
+docker run -d \
+  -v $(pwd)/init.sql:/docker-entrypoint-initdb.d/1.sql \
+  -e MYSQL_ROOT_PASSWORD=root \
+  -e MYSQL_DATABASE=soat7grupo5 \
+  -e MYSQL_USER=soat7grupo5 \
+  -e MYSQL_PASSWORD=soat7grupo5 \
+  -p 3306:3306 \
+  --name soat7grupo5-mysql \
+  soat7grupo5-mysql
