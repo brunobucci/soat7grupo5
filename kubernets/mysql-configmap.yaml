@@ -72,11 +72,12 @@ data:
     CREATE TABLE `pedido` (
       `id_pedido` int NOT NULL,
       `id_cliente` int DEFAULT NULL,
-      `id_status` int DEFAULT NULL,
-      `id_pagamento` int DEFAULT '1',
+      `id_status_pedido` int DEFAULT NULL,
+      `id_tipo_pagamento` int DEFAULT '1',
       `preco` double DEFAULT NULL,
       `duracao_total_preparo` int NOT NULL,
       `data_criacao` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      `id_status_pagamento` int DEFAULT '0',
       PRIMARY KEY (`id_pedido`)
     ) ENGINE=MyISAM DEFAULT CHARSET=ucs2;
     /*!40101 SET character_set_client = @saved_cs_client */;
