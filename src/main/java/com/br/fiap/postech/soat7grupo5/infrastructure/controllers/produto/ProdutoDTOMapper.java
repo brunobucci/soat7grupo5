@@ -1,4 +1,4 @@
-package com.br.fiap.postech.soat7grupo5.infrastructure.controllers.Produto;
+package com.br.fiap.postech.soat7grupo5.infrastructure.controllers.produto;
 
 import java.util.List;
 import java.util.stream.Collectors;

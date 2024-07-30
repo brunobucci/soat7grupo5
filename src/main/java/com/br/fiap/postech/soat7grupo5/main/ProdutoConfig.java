@@ -4,8 +4,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.br.fiap.postech.soat7grupo5.application.gateways.ProdutoGateway;
-import com.br.fiap.postech.soat7grupo5.application.usecases.cliente.ProdutoInteractor;
-import com.br.fiap.postech.soat7grupo5.infrastructure.controllers.Produto.ProdutoDTOMapper;
+import com.br.fiap.postech.soat7grupo5.application.usecases.ProdutoInteractor;
+import com.br.fiap.postech.soat7grupo5.infrastructure.controllers.produto.ProdutoDTOMapper;
 import com.br.fiap.postech.soat7grupo5.infrastructure.gateways.ProdutoRepositoryGateway;
 import com.br.fiap.postech.soat7grupo5.infrastructure.gateways.mappers.ProdutoEntityMapper;
 import com.br.fiap.postech.soat7grupo5.infrastructure.persistence.ProdutoRepository;

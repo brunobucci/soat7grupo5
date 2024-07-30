@@ -1,4 +1,4 @@
-package com.br.fiap.postech.soat7grupo5.application.usecases.cliente;
+package com.br.fiap.postech.soat7grupo5.application.usecases;
 
 import java.util.List;
 

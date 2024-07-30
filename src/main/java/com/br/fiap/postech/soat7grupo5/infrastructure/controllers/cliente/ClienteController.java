@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.br.fiap.postech.soat7grupo5.application.usecases.cliente.ClienteInteractor;
+import com.br.fiap.postech.soat7grupo5.application.usecases.ClienteInteractor;
 import com.br.fiap.postech.soat7grupo5.domain.entity.Cliente;
 
 import io.swagger.v3.oas.annotations.Operation;
