@@ -10,20 +10,15 @@ Video <a href="https://www.youtube.com/watch?v=H5oRXGVXaqc" target="_blank">aqui
 ### Roteiro para rodar kubernets
 https://github.com/brunobucci/soat7grupo5/blob/748b37dbc07047922a87d01d20a7f184251c30b1/kubernets/roteiro_kubernets.txt
 
-### Roteiro de testes da app - fase 2 do tech challenge
-https://github.com/brunobucci/.txt
+### Roteiro de testes da API - fase 2 do tech challenge
+https://github.com/brunobucci/soat7grupo5/blob/71753bf896cffbfdc5b3c2599826b15afdfcf3bd/documentacao/roteiro-api.txt
 
 ### Acesso API
 {{dominio}}:30000/...
 
 ### Postman collection
-https://github.com/brunobucci/.json
+https://github.com/brunobucci/soat7grupo5/blob/71753bf896cffbfdc5b3c2599826b15afdfcf3bd/documentacao/api-collection.json
 
-
-### MySQL 
-{{dominio}}:30306 <br>
-login:soat7grupo5 <br>
-senha:soat7grupo5
 
 ### Swagger (porta default)
 {{dominio}}:30000//swagger-ui/index.html

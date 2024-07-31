@@ -1,5 +1,7 @@
 Roteiro para o teste:
 
+Estar dentro da pasta /kubernets
+
 1- Criar o ambiente MySQL
 
     1.1 - ConfigMap

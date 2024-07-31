@@ -1,26 +1,13 @@
 ### Forma de execução das apis para execução da 2º fase
 
-Passo 1 - Criação de um produto
-  POST http://{servidor}:{porta}/produtos
-  Exemplo de JSON
-  {
-    "idProduto": 0,
-    "nome": "Nome do produto",
-    "descricao": "Descrição do produto.",
-    "preco": 10.0,
-    "duracaoPreparo": 15,
-    "idTipo": 2,
-    "flAtivo": 1
-  }
-
-Passo 2 – Checkout Pedido
+Passo 1 – Checkout Pedido
   POST http://{servidor}:{porta}/pedidos/checkout
   Exemplo de JSON
   {
     "pedido": {
       "idPedido": 0,
       "preco": 0,
-      "idStatusPedido": 0,
+      "idStatusPedido": 1,
       "idCliente": 1,
       "idTipoPagamento": 1,
       "duracaoTotalPreparo": 0,
@@ -40,15 +27,6 @@ Passo 2 – Checkout Pedido
   {
         "idPedidoProduto": 0,
         "idPedido": 0,
-        "idProduto": 102,
-        "precoProduto": 10,
-        "nomeProduto": "Fritas",
-        "duracaoPreparo": 5
-      },
-
-  {
-        "idPedidoProduto": 0,
-        "idPedido": 0,
         "idProduto": 3,
         "precoProduto": 12,
         "nomeProduto": "Suco de laranja",
@@ -57,22 +35,36 @@ Passo 2 – Checkout Pedido
     ]
   }
 
-Passo 3 – Consultar status de pagamento do pedido
-  GET http://{servidor}:{porta}/pedidos/status-pagamento/{idPedido}
-  Exemplo de consumo: http://localhost:8081/pedidos/status-pagamento/554 
 
-Passo 4 – Webhook para aprovar ou reprovar pagamento
-  POST http://{servidor}:{porta}/pedidos/checkout
+Passo 2 – Consultar status de pagamento do pedido
+  GET http://{servidor}:{porta}/pedidos/status-pagamento/{idPedido}
+  Exemplo de consumo: http://{servidor}:{porta}/pedidos/status-pagamento/554 
+
+
+Passo 3 – Webhook para aprovar ou reprovar pagamento
+         OBS: Trocar a variavel {idPedido} pelo ID do pedido criado no passo 2
+  POST http://{servidor}:{porta}/pagamento-webhook
   Exemplo de JSON
   {
-    "idPedido": 554,
+    "idPedido": {idPedido},
     "pagamentoAprovado": true
   }
 
+
+Passo 4 – Executar o passo 2 novamente, para verificar se houve atualização
+
+
 Passo 5 – Listagem ordenada
   GET http://{servidor}:{porta}/pedidos/busca-ordenada
-  Exemplo de consumo: http://localhost:8081/pedidos/busca-ordenada
+  Exemplo de consumo: http://{servidor}:{porta}/pedidos/busca-ordenada
+
+
 
 Passo 6 – Atualização de status do pedido
   PUT http://{servidor}:{porta}/pedidos/{idPedido}/status/{idStatus}
-  Exemplo de consumo: http://localhost:8081/pedidos/1/status/1 
+  Exemplo de consumo: http://{servidor}:{porta}/pedidos/1/status/1 
+
+
+Passo 7 - Verificação da atualização do status do pedido
+  GET http://{servidor}:{porta}/pedidos
+  Exemplo de consumo: http://{servidor}:{porta}/pedidos
