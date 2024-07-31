@@ -8,16 +8,16 @@ Video <a href="https://www.youtube.com/watch?v=H5oRXGVXaqc" target="_blank">aqui
 ![Diagrama Arquitetura Kubernets](https://github.com/brunobucci/soat7grupo5/blob/748b37dbc07047922a87d01d20a7f184251c30b1/kubernets/diagrama/Diagrama-Infra.png)
 
 ### Roteiro para rodar kubernets
-https://github.com/brunobucci/soat7grupo5/blob/748b37dbc07047922a87d01d20a7f184251c30b1/kubernets/roteiro_kubernets.txt
+https://github.com/brunobucci/soat7grupo5/blob/76837ab97186c9ec53689f6102e92d0281d777aa/kubernets/roteiro_kubernets.txt
 
 ### Roteiro de testes da API - fase 2 do tech challenge
-https://github.com/brunobucci/soat7grupo5/blob/71753bf896cffbfdc5b3c2599826b15afdfcf3bd/documentacao/roteiro-api.txt
+https://github.com/brunobucci/soat7grupo5/blob/76837ab97186c9ec53689f6102e92d0281d777aa/documentacao/roteiro-api.txt
 
 ### Acesso API
 {{dominio}}:30000/...
 
 ### Postman collection
-https://github.com/brunobucci/soat7grupo5/blob/71753bf896cffbfdc5b3c2599826b15afdfcf3bd/documentacao/api-collection.json
+https://github.com/brunobucci/soat7grupo5/blob/76837ab97186c9ec53689f6102e92d0281d777aa/documentacao/api-collection.json
 
 
 ### Swagger (porta default)
