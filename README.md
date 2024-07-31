@@ -20,12 +20,12 @@ https://github.com/brunobucci/soat7grupo5/blob/76837ab97186c9ec53689f6102e92d028
 https://github.com/brunobucci/soat7grupo5/blob/76837ab97186c9ec53689f6102e92d0281d777aa/documentacao/api-collection.json
 
 
-### Swagger (porta default)
+### Swagger
 {{dominio}}:30000//swagger-ui/index.html
 
 
 
-
+--
 # Tech Challenge Pos Tech SOAT7GRUPO5 - Fase 1
 
 ### Repositório:
@@ -57,7 +57,7 @@ docker compose up
 http://localhost:8080/swagger-ui/index.html
 
 
-
+--
 ## Specs:
 
 - Ubuntu 24.04
