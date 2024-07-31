@@ -1,7 +1,7 @@
 # Tech Challenge Pos Tech SOAT7GRUPO5 - Fase 2
 
 ### Link vídeo detalhando Arquitetura kubernets (Assistir ao vídeo junto com o desenho da arquitetura)
-Video <a href="https://www.youtube.com/watch?v=" target="_blank">aqui</a>
+Video <a href="https://www.youtube.com/watch?v=H5oRXGVXaqc" target="_blank">aqui</a>
 
 
 ### Diagrama Arquitetura kubernets
@@ -26,7 +26,7 @@ login:soat7grupo5 <br>
 senha:soat7grupo5
 
 ### Swagger (porta default)
-{{dominio}}:30000/api-docs/
+{{dominio}}:30000//swagger-ui/index.html
 
 
 
