@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.br.fiap.postech.soat7grupo5.application.gateways.PedidoGateway;
+import com.br.fiap.postech.soat7grupo5.application.gateways.PedidoProdutoGateway;
 import com.br.fiap.postech.soat7grupo5.application.usecases.pedido.AtualizarStatusPagamentoInteractor;
 import com.br.fiap.postech.soat7grupo5.application.usecases.pedido.BuscarPedidoPorIdInteractor;
 import com.br.fiap.postech.soat7grupo5.application.usecases.pedido.BuscarPedidosInteractor;
@@ -12,6 +13,7 @@ import com.br.fiap.postech.soat7grupo5.application.usecases.pedido.BuscarPedidos
 import com.br.fiap.postech.soat7grupo5.application.usecases.pedido.BuscarStatusPagamentoPedidoPorIdInteractor;
 import com.br.fiap.postech.soat7grupo5.application.usecases.pedido.CriarPedidoInteractor;
 import com.br.fiap.postech.soat7grupo5.application.usecases.pedido.EditarPedidoInteractor;
+import com.br.fiap.postech.soat7grupo5.application.usecases.pedidoproduto.BuscarPedidoProdutoPorIdPedidoInteractor;
 import com.br.fiap.postech.soat7grupo5.infrastructure.controllers.pedido.PedidoDTOMapper;
 import com.br.fiap.postech.soat7grupo5.infrastructure.gateways.PedidoRepositoryGateway;
 import com.br.fiap.postech.soat7grupo5.infrastructure.gateways.mappers.PedidoEntityMapper;
@@ -58,6 +60,11 @@ public class PedidoConfig {
 	@Bean
 	AtualizarStatusPagamentoInteractor atualizarStatusPagamentoInteractor(PedidoGateway pedidoGateway) {
 		return new AtualizarStatusPagamentoInteractor(pedidoGateway);
+	}
+	
+	@Bean
+	BuscarPedidoProdutoPorIdPedidoInteractor buscarPedidoProdutoPorIdPedidoInteractor(PedidoProdutoGateway pedidoProdutoGateway) {
+		return new BuscarPedidoProdutoPorIdPedidoInteractor(pedidoProdutoGateway);
 	}
 	
 	@Bean

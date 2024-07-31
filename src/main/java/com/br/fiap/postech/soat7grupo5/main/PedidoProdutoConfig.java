@@ -5,7 +5,6 @@ import org.springframework.context.annotation.Configuration;
 
 import com.br.fiap.postech.soat7grupo5.application.gateways.PedidoProdutoGateway;
 import com.br.fiap.postech.soat7grupo5.application.usecases.pedidoproduto.SalvarPedidoProdutoInteractor;
-import com.br.fiap.postech.soat7grupo5.infrastructure.controllers.pedido.PedidoProdutoDTOMapper;
 import com.br.fiap.postech.soat7grupo5.infrastructure.gateways.PedidoProdutoRepositoryGateway;
 import com.br.fiap.postech.soat7grupo5.infrastructure.gateways.mappers.PedidoProdutoEntityMapper;
 import com.br.fiap.postech.soat7grupo5.infrastructure.persistence.PedidoProdutoRepository;
@@ -28,8 +27,4 @@ public class PedidoProdutoConfig {
 		return new PedidoProdutoEntityMapper();
 	}
 	
-	@Bean
-	PedidoProdutoDTOMapper pedidoProdutoDTOMapper() {
-		return new PedidoProdutoDTOMapper();
-	}
 }

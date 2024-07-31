@@ -1,5 +1,6 @@
 package com.br.fiap.postech.soat7grupo5.infrastructure.controllers.pedido;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,6 +21,7 @@ import com.br.fiap.postech.soat7grupo5.application.usecases.pedido.BuscarPedidos
 import com.br.fiap.postech.soat7grupo5.application.usecases.pedido.BuscarStatusPagamentoPedidoPorIdInteractor;
 import com.br.fiap.postech.soat7grupo5.application.usecases.pedido.CriarPedidoInteractor;
 import com.br.fiap.postech.soat7grupo5.application.usecases.pedido.EditarPedidoInteractor;
+import com.br.fiap.postech.soat7grupo5.application.usecases.pedidoproduto.BuscarPedidoProdutoPorIdPedidoInteractor;
 import com.br.fiap.postech.soat7grupo5.application.usecases.pedidoproduto.SalvarPedidoProdutoInteractor;
 import com.br.fiap.postech.soat7grupo5.domain.entity.Pedido;
 import com.br.fiap.postech.soat7grupo5.domain.entity.PedidoProduto;
@@ -41,13 +43,14 @@ public class PedidoController {
 	private final BuscarPedidosOrdenadosInteractor buscarPedidosOrdenadosInteractor;
 	private final BuscarPedidoPorIdInteractor buscarPedidoPorIdInteractor;
 	private final AtualizarStatusPagamentoInteractor atualizarStatusPagamentoInteractor;
+	private final BuscarPedidoProdutoPorIdPedidoInteractor buscarPedidoProdutoPorIdPedidoInteractor;
 
 	private final PedidoDTOMapper pedidoDTOMapper;
 	private final SalvarPedidoProdutoInteractor salvarPedidoProdutoInteractor;
 
 	public PedidoController(CriarPedidoInteractor criarPedidoInteractor, EditarPedidoInteractor editarPedidoInteractor, BuscarPedidosPorStatusInteractor buscarPedidosPorStatusInteractor, BuscarPedidosInteractor buscarPedidosInteractor, 
 			BuscarStatusPagamentoPedidoPorIdInteractor buscarStatusPagamentoPedidoPorIdInteractor, BuscarPedidosOrdenadosInteractor buscarPedidosOrdenadosInteractor, BuscarPedidoPorIdInteractor buscarPedidoPorIdInteractor,
-			AtualizarStatusPagamentoInteractor atualizarStatusPagamentoInteractor, PedidoDTOMapper pedidoDTOMapper, SalvarPedidoProdutoInteractor salvarPedidoProdutoInteractor) {
+			AtualizarStatusPagamentoInteractor atualizarStatusPagamentoInteractor, PedidoDTOMapper pedidoDTOMapper, SalvarPedidoProdutoInteractor salvarPedidoProdutoInteractor, BuscarPedidoProdutoPorIdPedidoInteractor buscarPedidoProdutoPorIdPedidoInteractor) {
 		this.criarPedidoInteractor = criarPedidoInteractor;
 		this.editarPedidoInteractor = editarPedidoInteractor;
 		this.buscarPedidosPorStatusInteractor = buscarPedidosPorStatusInteractor;
@@ -58,6 +61,7 @@ public class PedidoController {
 		this.atualizarStatusPagamentoInteractor = atualizarStatusPagamentoInteractor;
 		this.pedidoDTOMapper = pedidoDTOMapper;
 		this.salvarPedidoProdutoInteractor = salvarPedidoProdutoInteractor;
+		this.buscarPedidoProdutoPorIdPedidoInteractor = buscarPedidoProdutoPorIdPedidoInteractor;
 	}
 
 	@PostMapping(path="/checkout")
@@ -73,7 +77,7 @@ public class PedidoController {
 
 		salvarPedidoProdutoInteractor.salvarPedidoProduto(pedido.getIdPedido(), pedidoCompletoRequest.getPedidoProdutos());
 
-		return "idPedido: "+pedido.getIdPedido();
+		return "{ \"idPedido\" : "+pedido.getIdPedido()+ " }";
 	}
 
 	@PutMapping(path="{idPedido}/status/{idStatus}")
@@ -85,23 +89,38 @@ public class PedidoController {
 
 	@GetMapping
 	@Operation(summary = "Retorna lista com todos os pedidos cadastrados.")
-	List<PedidoResponse> buscarPedidos() {
+	List<PedidoCompletoResponse> buscarPedidos() {
+		List<PedidoCompletoResponse> pedidosCompletosResponse = new ArrayList<PedidoCompletoResponse>(); 
 		List<Pedido> pedidos = buscarPedidosInteractor.buscarPedidos();
-		return pedidoDTOMapper.toResponseList(pedidos);
+		for(Pedido pedido : pedidos){
+			PedidoCompletoResponse pedidoCompletoResponse = new PedidoCompletoResponse();
+			pedidoCompletoResponse.setPedido(pedido);
+			List<PedidoProduto> pedidoProdutosPedido = buscarPedidoProdutoPorIdPedidoInteractor.buscarPedidoProdutosPorIdPedido(pedido.getIdPedido());
+			pedidoCompletoResponse.setPedidoProdutos(pedidoProdutosPedido);
+			pedidosCompletosResponse.add(pedidoCompletoResponse);
+		}	
+		return pedidosCompletosResponse;
 	}
 
 	@GetMapping(path="/busca-ordenada")
 	@Operation(summary = "Retorna lista com pedidos ordenados.")
-	List<PedidoResponse> buscarPedidosOrdenados() {
+	List<PedidoCompletoResponse> buscarPedidosOrdenados() {
+		List<PedidoCompletoResponse> pedidosCompletosResponse = new ArrayList<PedidoCompletoResponse>();
 		List<Pedido> pedidos = buscarPedidosOrdenadosInteractor.buscarPedidosOrdenados();
-		return pedidoDTOMapper.toResponseList(pedidos);
+		for(Pedido pedido : pedidos){
+			PedidoCompletoResponse pedidoCompletoResponse = new PedidoCompletoResponse();
+			pedidoCompletoResponse.setPedido(pedido);
+			pedidoCompletoResponse.setPedidoProdutos(buscarPedidoProdutoPorIdPedidoInteractor.buscarPedidoProdutosPorIdPedido(pedido.getIdPedido()));
+			pedidosCompletosResponse.add(pedidoCompletoResponse);
+		}	
+		return pedidosCompletosResponse;
 	}
 
 	@GetMapping(path="/status-pagamento/{idPedido}")
 	@Operation(summary = "Buscar status pagamento por id do pedido.")
 	String buscarStatusPagamentoPedidoPorId(@Parameter(description = "ID do pedido", example = "1") @PathVariable int idPedido) {
 		boolean pagamentAprovado = buscarStatusPagamentoPedidoPorIdInteractor.buscarStatusPagamentoPedidoPorId(idPedido);
-		return "pagamentoAprovado: " + pagamentAprovado;
+		return "{ \"pagamentoAprovado\" : " + pagamentAprovado + " }";
 	}    
 
 	@GetMapping(path="/{idStatus}")

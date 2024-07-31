@@ -1,7 +1,8 @@
 package com.br.fiap.postech.soat7grupo5.domain.entity;
 
+//public record PedidoProduto (int idPedidoProduto, int idPedido, int idProduto, String nomeProduto, Double precoProduto, int duracaoPreparo){
 public class PedidoProduto {
-
+	
 	private int idPedidoProduto;
 	private int idPedido;
 	private int idProduto;
@@ -9,8 +10,17 @@ public class PedidoProduto {
     private String nomeProduto;
     private int duracaoPreparo;
     
-    public PedidoProduto(int idPedidoProduto2, int idPedido2, int idProduto2, String nomeProduto2, Double precoProduto2, int duracaoPreparo2) {
+    public PedidoProduto() {
 		// TODO Auto-generated constructor stub
+	}
+
+	public PedidoProduto(int idPedidoProduto, int idPedido, int idProduto, String nomeProduto, Double precoProduto,	int duracaoPreparo) {
+		this.idPedidoProduto= idPedidoProduto;
+		this.idPedido = idPedido;
+		this.idProduto = idProduto;
+	    this.precoProduto = precoProduto;
+	    this.nomeProduto = nomeProduto;
+	    this.duracaoPreparo = duracaoPreparo;
 	}
 
 	public int getIdPedidoProduto() {
