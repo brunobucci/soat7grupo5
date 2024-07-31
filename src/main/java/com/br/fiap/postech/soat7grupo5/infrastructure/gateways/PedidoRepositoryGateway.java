@@ -49,7 +49,7 @@ public class PedidoRepositoryGateway implements PedidoGateway{
 	
 	@Override
 	public List<Pedido> buscarPedidosOrdenados() {
-		List<PedidoEntity> savedObjList = (List<PedidoEntity>) pedidoRepository.findAllByIdStatusPedidoNotOrderByIdStatusPedidoAscDataCriacaoDesc(4);
+		List<PedidoEntity> savedObjList = (List<PedidoEntity>) pedidoRepository.findAllByIdStatusPedidoNotOrderByIdStatusPedidoDescDataCriacaoDesc(4);
 		return pedidoEntityMapper.toDomainObjList(savedObjList); 
 	}
 	
