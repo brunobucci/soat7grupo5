@@ -6,5 +6,5 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface PedidoRepository extends CrudRepository<PedidoEntity, Integer> {
 	List<PedidoEntity> findByIdStatusPedido(int idStatus);
-	List<PedidoEntity> findAllByIdStatusPedidoNotOrderByIdStatusPedidoAscDataCriacaoDesc(int idStatusPedido);
+	List<PedidoEntity> findAllByIdStatusPedidoNotOrderByIdStatusPedidoDescDataCriacaoDesc(int idStatusPedido);
 }

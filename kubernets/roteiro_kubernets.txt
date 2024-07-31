@@ -1,6 +1,6 @@
 Roteiro para o teste:
 
-Estar dentro da pasta /kubernets
+Executar os comandos dentro da pasta /kubernets
 
 1- Criar o ambiente MySQL
 

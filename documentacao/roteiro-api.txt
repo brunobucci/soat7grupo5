@@ -4,7 +4,7 @@ Passo 1 – Checkout Pedido
   POST http://{servidor}:{porta}/pedidos/checkout
   Exemplo de JSON
   {
-    "pedido": {
+    "pedido": {   
       "idPedido": 0,
       "preco": 0,
       "idStatusPedido": 1,
